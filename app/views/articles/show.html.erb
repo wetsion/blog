@@ -1,0 +1,50 @@
+<p>
+
+
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+  		<%= @article.title %>
+  	</div>
+
+  	<div class="panel-body">
+		<%= @article.text %>
+  	</div>
+
+  </div>
+
+  <h2>评论列表</h2>
+  <% @article.comments.each do |comment| %>
+  	<p>
+    <strong>评论人:</strong>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>评论内容:</strong>
+    <%= comment.body %>
+  </p>
+  <p>
+  	<%= link_to '删除评论', [@article, comment], 
+  		method: :delete, data: { confirm: '确定删除'} %>
+  </p>
+  <% end %>
+
+  <h2>添加评论</h2>
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+  	<p>
+  		<%= f.label :comments %>
+  		<%= f.text_field :commenter %>
+  	</p>
+  	<p>
+  		<%= f.label :body %><br>
+  		<%= f.text_area :body %>
+  	</p>
+  	<p>
+  		<%= f.submit %>
+  	</p>
+  <% end %>
+
+
+  <%= link_to '编辑', edit_article_path(@article) %>
+  <%= link_to '返回', articles_path %>
+</p>

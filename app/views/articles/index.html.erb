@@ -1,0 +1,22 @@
+<h1>博客文章列表</h1>
+
+<%= link_to '添加博客', new_article_path %>
+ 
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th colspan="3"></th>
+  </tr>
+
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= link_to '显示', article_path(article) %></td>
+      <td><%= link_to '编辑', edit_article_path(article) %></td>
+      <td><%= link_to '删除', article_path(article), method: :delete, data: {confirm: '确定删除'} %></td>
+    </tr>
+  <% end %>
+
+</table>
